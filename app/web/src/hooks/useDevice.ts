@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 
 export const useDevice = () => {
-  const [device, setDevice] = useState<string>('desktop');
+  const [device, setDevice] = useState('mobile');
 
   useEffect(() => {
-    async function check() {
-      try {
-        const response = await fetch(`/api/agent`);
-
-        const res = await response.json();
-        setDevice(res.device);
-      } finally {
-      }
+    const userAgent = navigator.userAgent.toLowerCase();
+    const mobile =
+      /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        userAgent
+      );
+    if (mobile) {
+      setDevice('mobile');
+    } else {
+      setDevice('desktop');
     }
-
-    check();
   }, []);
 
   return device;
