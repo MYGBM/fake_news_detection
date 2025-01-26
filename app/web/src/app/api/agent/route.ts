@@ -1,6 +1,6 @@
 import { NextResponse, userAgent } from 'next/server';
 
-export function GET({ headers }: { headers: Headers }) {
+export function GET({ headers }: Request) {
   const agent = userAgent({ headers });
 
   return NextResponse.json({
