@@ -8,21 +8,26 @@ import { Button } from '@/components/ui/button';
 import { useDetector } from '@/hooks/useDetector';
 import Header from '@/components/header';
 import Analysis from '@/components/analysis';
+import { useDevice } from '@/hooks/useDevice';
 
 export default function Home() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [keywrite, setKeywrite] = useState<KeywriteWeb>();
   const [value, setValue] = useState<string>('');
+  const device = useDevice();
 
   useEffect(() => {
-    if (textareaRef.current && !keywrite) {
-      setKeywrite(
-        new KeywriteWeb(textareaRef.current, {
-          Amharic: Amharic.inputMethod,
-        })
-      );
+    if (textareaRef.current && !keywrite && device !== 'mobile') {
+      const k = new KeywriteWeb(textareaRef.current, {
+        Amharic: Amharic.inputMethod,
+      });
+
+      k.on = device !== 'mobile';
+      setKeywrite(k);
+    } else if (keywrite && device === 'mobile') {
+      keywrite.on = false;
     }
-  }, [setKeywrite, keywrite]);
+  }, [setKeywrite, keywrite, device]);
 
   const { detect, loading, result } = useDetector();
 
