@@ -1,6 +1,29 @@
-# Fake news detection
+# Amharic Fake News Detection System
 
-## Data preprocessing
+A comprehensive machine learning solution designed to detect fake news in Amharic text. This project integrates a robust data preprocessing pipeline, a Scikit-learn classification model, a FastAPI backend, and a Next.js web frontend.
 
-This is the data preprocessing step. We found the data from this [source](https://github.com/MenbereHailu/Amharic_Fake_News_Detection_On_Social_Media-_Using_Pretrained-_Language_Model/blob/main/Merged%20_Fakenews_Data.xlsx).
-What we did in the preprocessing step is first normalize the data into a single standard. We removed white spaces and special characters. We also removed underscores(`_`) and hyphens(`-`). This was for the preprocessing step.
+## 🚀 Features
+
+- **Amharic Text Preprocessing**: Specialized normalization and cleaning for Amharic script (Fidel), including character unification, removal of Geez numbers, and noise filtering.
+- **Machine Learning Model**: Classification model trained to distinguish between real and fake news.
+- **REST API**: High-performance API built with FastAPI to serve predictions.
+- **Web Interface**: Modern, responsive user interface built with Next.js for easy interaction.
+- **Data Profiling**: Tools to analyze text data distribution and quality.
+
+## 📂 Project Structure
+
+```bash
+fake_news_detection/
+├── app/
+│   ├── api/                 # Backend API (FastAPI)
+│   │   ├── internal/        # Model loading and inference logic
+│   │   ├── schemas/         # Pydantic models for request/response
+│   │   ├── main.py          # API entry point
+│   │   └── requirements.txt # Python dependencies
+│   └── web/                 # Frontend Application (Next.js)
+├── notebooks/               # Jupyter notebooks for EDA and training
+│   ├── data_preprocess.ipynb
+│   └── model_training.ipynb
+├── src/                     # Core data processing logic
+│   └── preprocess.py        # Amharic normalization class
+└── README.md
